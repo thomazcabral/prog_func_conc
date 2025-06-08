@@ -34,5 +34,4 @@ comp2 :: (t -> u) -> (u -> u -> v) -> (t -> t -> v)
 comp2 f g = (\x y -> g (f x) (f y)) -- comp2 length (+) "ola" "mundo" = 8
 
 doubleList :: [Integer] -> [Integer]
-doubleList = map (multiply 2) -- não trava. ele espera outro número pra multiplicar por 2, que virá dentro da listq
-
+doubleList = map (multiply 2) -- não trava. ele espera outro número pra multiplicar por 2, que virá dentro da lista

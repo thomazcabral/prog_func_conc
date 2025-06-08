@@ -52,3 +52,21 @@ qsort (a:as) = menorA ++ [a] ++ maiorA
     where
         menorA = qsort [b | b <- as, b <= a]
         maiorA = qsort [b | b <- as, b > a]
+
+merge :: Ord a => [a] -> [a] -> [a]
+merge xs [] = xs
+merge [] ys = ys
+merge (x:xs) (y:ys)
+ | x <= y = x : merge xs (y:ys)
+ | otherwise = y : merge (x:xs) ys
+
+mergeSort :: Ord a => [a] -> [a]
+mergeSort [] = []
+mergeSort [x] = [x]
+mergeSort xs =
+    let
+        metade = length xs `div` 2
+        metade1 = take metade xs
+        metade2 = drop metade xs
+    in
+        merge (mergeSort metade1) (mergeSort metade2)
