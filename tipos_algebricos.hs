@@ -92,3 +92,12 @@ mapMaybe g (Just x) = Just (g x)
 maybe :: b -> (a -> b) -> Maybe a -> b
 maybe n g Nothing = n
 maybe n g (Just x) = g x
+
+mHead :: [t] -> Maybe t
+mHead [] = Nothing
+mHead (x:_) = Just x
+
+usandoMhead :: (Show t) => [t] -> String
+usandoMhead l = case mHead l of
+                    Nothing -> "Lista vazia"
+                    Just x -> "Head: " ++ show x
