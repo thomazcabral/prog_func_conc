@@ -35,3 +35,13 @@ comp2 f g = (\x y -> g (f x) (f y)) -- comp2 length (+) "ola" "mundo" = 8
 
 doubleList :: [Integer] -> [Integer]
 doubleList = map (multiply 2) -- não trava. ele espera outro número pra multiplicar por 2, que virá dentro da lista
+
+total :: (Integer -> Integer) -> (Integer -> Integer)
+total f 0 = f 0
+total f n = f n + total f (n-1)
+
+other :: (a -> b -> c) -> (b -> a -> c)
+other f a b = f b a
+
+mapFuns3 :: [a -> b] -> a -> [b]
+mapFuns3 fs x = map($ x) fs

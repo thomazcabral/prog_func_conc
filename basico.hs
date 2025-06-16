@@ -62,3 +62,7 @@ max3 a b c
     | a >= b && a >= c = a
     | b >= c = b
     | otherwise = c
+
+charToNum :: Char -> Int
+charToNum x = if ((x >= '0') && (x <= '9')) then (fromEnum(x) - fromEnum('0')) else 0
+

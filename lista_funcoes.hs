@@ -1,4 +1,4 @@
-{- 1. Definir a função dobro de tipo Integer−>Integer. A função deve receber um argumento
+{-{- 1. Definir a função dobro de tipo Integer−>Integer. A função deve receber um argumento
 e devolvê-lo multiplicado por dois. -}
 dobro :: Integer -> Integer
 dobro x = x*2
@@ -122,20 +122,68 @@ quantidade n de espaços à esquerda de um dado String, movendo o mesmo para a d
 paraDireita :: Int −> String −> String-}
 paraDireita :: Int -> String -> String
 paraDireita a b = addEspacos a ++ b
+-}
 
+dobro :: Integer -> Integer
+dobro = (*2)
 
-{-14. Escreva uma função para retornar, em forma de tabela, todas as vendas da semana 0 até
-a semana n, incluindo o total e a média de vendas no período. Usem as funções definidas
-previamente e defina novas funções que achar necessário.
-Semana Venda
-0 12
-1 14
-2 15
-Total 41
-Média 13.6667
-imprimeTabela : : Int −> String
-imprimeTabela n = ca b e cal ho
+quadruplo :: Integer -> Integer
+quadruplo = dobro . dobro
 
-++ imprimeSemanas n
-++ imprimeTotal n
-++ imprimeMedia n-}
+poli2 :: Double -> Double -> Double -> Double -> Double
+poli2 a b c x = a * x * x + b * x + c
+
+parImpar :: Integer -> String
+parImpar x = if x `mod` 2 == 0 then "Par" else "Impar"
+
+maxThree :: Integer -> Integer -> Integer -> Integer
+maxThree a b c
+    | a >= b && a >= c = a
+    | b >= a && b >= c = b
+    | otherwise = c
+
+maxFour1 :: Integer -> Integer -> Integer -> Integer -> Integer
+maxFour1 a b c d = if a >= (maxThree b c d) then a else (maxThree b c d)
+
+maxFour2 :: Integer -> Integer -> Integer -> Integer -> Integer
+maxFour2 a b c d = max a (maxThree b c d)
+
+maxFour3 :: Integer -> Integer -> Integer -> Integer -> Integer
+maxFour3 a b c d = max a (max b (max c d))
+
+quantosIguais :: Integer -> Integer -> Integer -> Integer
+quantosIguais a b c
+    | a == b && a == c = 3
+    | a == b || a == c || b == c = 2
+    | otherwise = 0
+
+ehZero :: Integer -> Bool
+ehZero 0 = True
+ehZero _ = False
+
+sumTo :: Integer -> Integer
+sumTo 1 = 1
+sumTo n = n + sumTo (n-1)
+
+potencia :: Integer -> Integer -> Integer
+potencia n 0 = 1
+potencia n k = n * potencia (n) (k-1)
+
+binom :: Integer -> Integer -> Integer
+binom n 0 = 1
+binom 0 k = 0
+binom n k = binom (n-1) (k) + binom (n-1) (k-1)
+
+tribonacci :: Integer -> Integer
+tribonacci 1 = 1
+tribonacci 2 = 1
+tribonacci 3 = 2
+tribonacci n = tribonacci (n-1) + tribonacci (n-2) + tribonacci (n-3)
+
+addEspacos :: Int -> String
+addEspacos 0 = ""
+addEspacos n = " " ++ addEspacos (n-1)
+
+paraDireita :: Int -> String -> String
+paraDireita i s = addEspacos i ++ s
+

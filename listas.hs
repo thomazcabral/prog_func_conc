@@ -70,3 +70,57 @@ mergeSort xs =
         metade2 = drop metade xs
     in
         merge (mergeSort metade1) (mergeSort metade2)
+
+doubleAll :: [Integer] -> [Integer]
+doubleAll numbers = [x*2 | x <- numbers]
+
+divisors :: Integer -> [Integer]
+divisors number = [x | x <- [1 .. number], number `mod` x == 0]
+
+isPrime :: Integer -> Bool
+isPrime x = if divisors x == [1, x] then True else False
+
+matches :: Integer -> [Integer] -> [Integer]
+matches number list = [x | x <- list, x == number]
+
+duplicate :: String -> Integer -> String
+duplicate s 0 = ""
+duplicate s 1 = s
+duplicate s i = s ++ duplicate (s) (i-1)
+
+sublistas :: [a] -> [[a]]
+sublistas [] = [[]]
+sublistas (x:xs) = sublistas xs ++ map (x:) (sublistas xs)
+
+ins :: Integer -> [Integer] -> [Integer]
+ins i [] = [i]
+ins i (x:xs) = if i < x then i:(x:xs) else x:(ins i xs)
+
+iSort :: [Integer] -> [Integer]
+iSort [] = []
+iSort (x:xs) = ins x (iSort xs)
+
+unique :: [Integer] -> [Integer]
+unique xs = [x | x <- xs, count x xs == 1]
+    where
+        count e list = length [i | i <- list, i == e]
+
+revverse :: [Integer] -> [Integer]
+revverse [] = []
+revverse xs = [(last xs)] ++ (revverse (init xs))
+
+isSorted :: [Integer] -> Bool
+isSorted [] = True
+isSorted [x] = True
+isSorted (x:xs) = if x <= (head xs) then isSorted (xs) else False
+
+dropp :: Int -> [a] -> [a]
+dropp x [] = []
+dropp 0 lst = lst
+dropp x (y:ys) = dropp (x-1) (ys)
+
+zipp3 :: [a] -> [b] -> [c] -> [(a, b, c)]
+zipp3 [] _ _ = []
+zipp3 _ [] _ = []
+zipp3 _ _ [] = []
+zipp3 (x:xs) (y:ys) (z:zs) = (x, y, z) : (zipp3 xs ys zs)
